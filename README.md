@@ -9,6 +9,8 @@ using GOGStoreQuery
 string gameName = "Surviving Mars";
 
 Models.Response response = Query.Search(gameName);
+if(response.Products.Count() == 0)
+    throw new Exception("No results found!");
 var firstResult = response.Products[0];
 string responseMessage = $"GOG listing: {firstResult.Title} is available for ${firstResult.Price.FinalAmount}. You can find it here: https://gog.com/{firstResult.Url}";
 // result: GOG listing: Surviving Mars - Pre-Order is available for $39.99. You can find it here: https://www.gog.com//game/surviving_mars
@@ -21,6 +23,8 @@ using GOGStoreQuery
 string gameName = "Surviving Mars";
 
 Models.Response response = await Query.SearchAsync(gameName);
+if(response.Products.Count() == 0)
+    throw new Exception("No results found!");
 var firstResult = response.Products[0];
 string responseMessage = $"GOG listing: {firstResult.Title} is available for ${firstResult.Price.FinalAmount}. You can find it here: https://gog.com/{firstResult.Url}";
 // result: GOG listing: Surviving Mars - Pre-Order is available for $39.99. You can find it here: https://www.gog.com//game/surviving_mars
